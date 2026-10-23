@@ -1,0 +1,6 @@
+{
+  "name": "sam-poll-finder",
+  "private": true,
+  "description": "Staten Island poll-site finder for Sam Pirozzolo for Assembly 2026",
+  "engines": { "node": ">=18" }
+}

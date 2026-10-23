@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Find your early voting site and Election Day poll site on Staten Island, and see Sam Pirozzolo’s endorsed team on your ballot.">
+<meta property="og:title" content="Find where you vote · Sam Pirozzolo">
+<meta property="og:description" content="Early voting Oct. 24 – Nov. 1 · Election Day Tues., Nov. 3. Enter your address to find your poll site.">
+<meta property="og:image" content="/assets/sam-hero.jpg">
+<link rel="icon" href="/assets/logo-white.png">
+<title>Find Your Poll Site</title>
+<style>
+/* Layout: navy campaign band with photo hero; address form card; dated schedule strip; one committed dark-navy look */
+:root {
+  --navy: #0b1638;
+  --navy-2: #13245a;
+  --navy-3: #1d3a8a;
+  --red: #e3262f;
+  --red-dark: #b3141c;
+  --sky: #9fd3ff;
+  --white: #ffffff;
+  --paper: #f5f7fb;
+  --ink: #0b1638;
+  --ink-soft: #46516e;
+  --line: rgba(255,255,255,0.16);
+  --display: 'SP Archivo', 'Archivo', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+  --body: 'SP Archivo', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--navy); }
+body { background: var(--navy); color: var(--white); font-family: var(--body); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.cond { font-family: var(--display); font-weight: 900; font-stretch: 72%; text-transform: uppercase; letter-spacing: 0.005em; }
+.eyebrow { font-weight: 800; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.75rem; }
+
+/* top bar */
+.topbar { border-bottom: 1px solid var(--line); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.topbar img { width: 150px; height: auto; display: block; }
+.topbar .dates { font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: var(--sky); }
+.topbar .dates b { color: var(--white); font-weight: 800; }
+
+/* hero */
+.hero { position: relative; overflow: hidden; background: radial-gradient(ellipse 70% 120% at 0% 0%, var(--navy-3) 0%, var(--navy-2) 40%, var(--navy) 100%); }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.07; background-image: radial-gradient(#fff 1px, transparent 1.2px); background-size: 22px 22px; }
+.hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 32px; align-items: end; padding-block: 44px 0; }
+.hero-copy { padding-bottom: 44px; min-width: 0; }
+.hero h1 { margin: 10px 0 14px; font-size: clamp(3.2rem, 8vw, 5.6rem); line-height: 0.86; text-wrap: balance; }
+.hero h1 span { color: var(--red); }
+.hero p.lede { margin: 0; max-width: 34em; font-size: 1.1rem; color: rgba(255,255,255,0.86); }
+.hero-photo { position: relative; align-self: stretch; min-height: 320px; display: block; width: 100%; background-image: url("/assets/sam-hero.jpg"); background-size: cover; background-position: 55% 10%; background-repeat: no-repeat; border-radius: 14px 14px 0 0; }
+.hero-photo::after { content: ""; position: absolute; inset: 0; border-radius: 14px 14px 0 0; background: linear-gradient(180deg, rgba(11,22,56,0) 60%, rgba(11,22,56,0.55) 100%); }
+.stripes { height: 10px; background: repeating-linear-gradient(90deg, var(--red) 0 28px, var(--white) 28px 36px, var(--navy-2) 36px 64px, var(--white) 64px 72px); }
+
+/* main */
+main .wrap { padding-block: 40px 56px; display: grid; gap: 40px; }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+
+.card { background: var(--paper); color: var(--ink); border-radius: 14px; padding: 26px; box-shadow: 0 18px 40px rgba(0,0,0,0.35); }
+.card h2 { margin: 0 0 4px; font-size: 2.1rem; line-height: 0.95; color: var(--ink); }
+.card .sub { margin: 0 0 20px; color: var(--ink-soft); font-size: 0.95rem; }
+.step { display: inline-flex; align-items: center; gap: 8px; color: var(--red); }
+.step i { font-style: normal; width: 22px; height: 22px; border-radius: 50%; background: var(--red); color: var(--white); display: inline-grid; place-items: center; font-size: 0.72rem; letter-spacing: 0; }
+
+form { display: grid; gap: 14px; }
+.row { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 12px; }
+.row.zip { grid-template-columns: 9rem minmax(0, 1fr); align-items: end; }
+label { display: grid; gap: 6px; font-weight: 800; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); min-width: 0; }
+input { width: 100%; font: inherit; font-size: 1.05rem; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--ink); background: var(--white); border: 2px solid #c9d1e3; border-radius: 8px; padding: 12px 12px; color-scheme: light; }
+input:focus { outline: none; border-color: var(--navy-3); box-shadow: 0 0 0 3px rgba(29,58,138,0.2); }
+input[aria-invalid="true"] { border-color: var(--red); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 0; cursor: pointer; text-decoration: none; background: var(--red); color: var(--white); border-radius: 8px; padding: 15px 20px; font-family: var(--display); font-weight: 900; font-stretch: 72%; text-transform: uppercase; font-size: 1.35rem; line-height: 1; letter-spacing: 0.02em; box-shadow: 0 6px 16px rgba(227,38,47,0.35); transition: transform .15s ease, background .15s ease; }
+.btn:hover { background: var(--red-dark); }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible, .copy:focus-visible, a:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+.err { margin: 0; color: var(--red-dark); font-weight: 700; font-size: 0.9rem; }
+
+/* result */
+.result { display: grid; gap: 16px; }
+.result .addr { display: grid; gap: 8px; }
+.field { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) auto; align-items: center; gap: 10px; background: var(--white); border: 1px solid #d8deea; border-radius: 8px; padding: 10px 10px 10px 14px; }
+.field .k { font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); }
+.field .v { font-weight: 700; font-size: 1.05rem; overflow-wrap: anywhere; user-select: all; }
+.copy { font: inherit; font-weight: 800; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--navy-2); background: #e6ecf8; border: 0; border-radius: 6px; padding: 8px 10px; cursor: pointer; white-space: nowrap; }
+.copy.done { background: var(--navy-2); color: var(--white); }
+.note { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+.note b { color: var(--ink); }
+.warn { margin: 0; padding: 10px 12px; border-radius: 8px; background: #fff1f1; color: var(--red-dark); font-weight: 700; font-size: 0.88rem; }
+.placeholder { border: 2px dashed #c9d1e3; border-radius: 10px; padding: 22px; color: var(--ink-soft); display: grid; gap: 10px; }
+.placeholder ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 4px; }
+
+/* schedule */
+.sched h2 { margin: 0 0 6px; font-size: clamp(2.2rem, 5vw, 3.1rem); line-height: 0.9; }
+.sched p.sub { margin: 0 0 20px; color: rgba(255,255,255,0.8); }
+.days { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 8px; }
+.day { border: 1px solid var(--line); border-radius: 10px; padding: 12px 8px 12px; text-align: center; background: rgba(255,255,255,0.04); display: grid; gap: 4px; align-content: start; }
+.day .dow { font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sky); }
+.day .d { font-size: 1.9rem; line-height: 0.9; }
+.day .h { font-weight: 700; font-size: 0.78rem; line-height: 1.25; font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.9); }
+.day.late { border-color: rgba(159,211,255,0.5); }
+.day .tag { justify-self: center; font-weight: 800; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 6px; border-radius: 4px; background: var(--sky); color: var(--navy); }
+.day.today { background: var(--white); border-color: var(--white); color: var(--navy); }
+.day.today .dow { color: var(--red); }
+.day.today .h { color: var(--navy); }
+.day.today .tag { background: var(--red); color: var(--white); }
+.day.past { opacity: 0.4; }
+
+.eday { margin-top: 16px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 20px; align-items: center; background: var(--red); border-radius: 14px; padding: 20px 24px; box-shadow: 0 14px 30px rgba(0,0,0,0.3); }
+.eday .big { font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: 0.85; }
+.eday .mid { display: grid; gap: 4px; min-width: 0; }
+.eday .mid .t { font-size: 1.7rem; line-height: 0.95; }
+.eday .mid .s { font-weight: 600; font-size: 0.92rem; color: rgba(255,255,255,0.92); }
+.eday .hrs { text-align: right; }
+.eday .hrs .t { font-size: 2rem; line-height: 0.9; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.eday .hrs .s { font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; }
+
+.tips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.tip { border-top: 3px solid var(--red); padding-top: 14px; min-width: 0; }
+.tip h3 { margin: 0 0 6px; font-size: 1.45rem; line-height: 0.95; }
+.tip p { margin: 0; color: rgba(255,255,255,0.84); font-size: 0.95rem; }
+.tip .phone { display: inline-block; margin-top: 6px; font-weight: 800; color: var(--white); user-select: all; font-variant-numeric: tabular-nums; }
+
+.vote-sam { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: center; border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; background: linear-gradient(120deg, rgba(29,58,138,0.55), rgba(11,22,56,0.2)); }
+.vote-sam img { width: 200px; height: auto; display: block; }
+.vote-sam .t { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 0.9; }
+.vote-sam .t span { color: var(--sky); }
+.vote-sam p { margin: 6px 0 0; color: rgba(255,255,255,0.84); }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 22px 28px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
+.paid { border: 1.5px solid rgba(255,255,255,0.9); padding: 7px 10px 6px; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+footer small { color: rgba(255,255,255,0.6); font-size: 0.75rem; max-width: 46em; }
+
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); padding-block: 32px 0; gap: 22px; }
+  .hero-copy { padding-bottom: 0; }
+  .hero-photo { min-height: 0; height: 58vw; max-height: 420px; max-width: 100%; }
+  .grid2 { grid-template-columns: minmax(0, 1fr); }
+  .days { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .eday { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .eday .hrs { text-align: left; }
+  .tips { grid-template-columns: minmax(0, 1fr); }
+  .vote-sam { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  .row, .row.zip { grid-template-columns: minmax(0, 1fr); }
+  .field { grid-template-columns: minmax(0, 1fr) auto; }
+  .field .k { grid-column: 1 / -1; }
+  .card { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+<style>
+@font-face { font-family: 'SP Archivo'; src: url('/assets/archivo.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap; }
+[hidden] { display: none !important; }
+.lookup { display: grid; gap: 12px; }
+.lookup .status { margin: 0; padding: 12px 14px; border-radius: 8px; background: #e6ecf8; color: var(--navy-2); font-weight: 700; font-size: 0.92rem; }
+.lookup .status.bad { background: #fff1f1; color: var(--red-dark); }
+.site { background: var(--white); border: 1px solid #d8deea; border-left: 5px solid var(--navy-2); border-radius: 8px; padding: 14px 16px; display: grid; gap: 4px; }
+.site.ev { border-left-color: var(--red); }
+.site .lbl { font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); }
+.site.ed .lbl { color: var(--navy-2); }
+.site .nm { font-family: var(--display); font-weight: 900; font-stretch: 72%; text-transform: uppercase; font-size: 1.5rem; line-height: 0.95; color: var(--ink); }
+.site .ad { font-weight: 600; color: var(--ink); }
+.site .hr { font-size: 0.85rem; color: var(--ink-soft); white-space: pre-line; }
+.site .msg { font-weight: 500; font-size: 15px; line-height: 1.45; color: var(--ink); }
+.site a.dir { justify-self: start; margin-top: 4px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--navy-2); text-decoration: none; }
+.site a.btn { justify-self: start; margin-top: 8px; font-size: 17px; padding: 12px 14px; color: #fff; }
+.team { margin-top: 28px; background: var(--navy-2); border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px 22px; }
+.team .bar { height: 8px; width: 140px; margin-bottom: 14px; background: repeating-linear-gradient(90deg, var(--red) 0 22px, var(--white) 22px 28px, var(--sky) 28px 50px, var(--white) 50px 56px); }
+.team h2 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 0.9; color: var(--white); }
+.team h2 span { color: var(--red); }
+.team .tsub { margin: 10px 0 0; color: rgba(255,255,255,0.8); font-size: 0.95rem; }
+.team .tload { margin: 18px 0 0; padding: 12px 14px; border-radius: 8px; background: rgba(255,255,255,0.08); font-weight: 700; font-size: 0.92rem; color: var(--sky); }
+.team .tgrid { margin-top: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.team .cand { display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 12px; min-width: 0; }
+.team .cand.me { background: rgba(227,38,47,0.25); border-color: rgba(227,38,47,0.6); }
+.team .cand img { flex: none; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; display: block; box-shadow: 0 0 0 3px #ffffff; background: var(--navy); }
+.team .cand .txt { min-width: 0; }
+.team .cand .o { display: block; font-weight: 800; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sky); line-height: 1.3; }
+.team .cand .n { display: block; margin-top: 3px; font-family: var(--display); font-weight: 900; font-stretch: 72%; text-transform: uppercase; font-size: 1.5rem; line-height: 1; color: var(--white); }
+.team .tnote { margin: 14px 0 0; font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+@media (max-width: 860px) { .team .tgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .team { padding: 22px 16px 18px; } .team .tgrid { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <img src="/assets/logo-white.png" alt="Sam Pirozzolo, State Assembly">
+    <div class="dates"><b>Early voting</b> Oct. 24 – Nov. 1 &nbsp;·&nbsp; <b>Election Day</b> Tues., Nov. 3</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow" style="color: var(--sky)">Staten Island · 2026 General Election</div>
+      <h1 class="cond">Find where<br><span>you vote.</span></h1>
+      <p class="lede">Your early voting site and your Election Day poll site can be two different places. Enter your address and we’ll get you to both in under a minute.</p>
+    </div>
+    <div class="hero-photo" role="img" aria-label="Assemblyman Sam Pirozzolo greeting families at a Staten Island community event"></div>
+  </div>
+</section>
+<div class="stripes" aria-hidden="true"></div>
+
+<main>
+  <div class="wrap">
+    <div class="grid2">
+      <section class="card" aria-labelledby="f-h">
+        <div class="eyebrow step"><i>1</i> Your address</div>
+        <h2 id="f-h" class="cond" style="margin-top: 8px">Where are you registered?</h2>
+        <p class="sub">Use the address where you’re registered to vote.</p>
+        <form id="addr" novalidate>
+          <div class="row">
+            <label for="house">House no.<input id="house" name="house" inputmode="numeric" autocomplete="address-line1" placeholder="e.g. 1250"></label>
+            <label for="street">Street name<input id="street" name="street" autocomplete="off" placeholder="e.g. Victory Blvd"></label>
+          </div>
+          <div class="row zip">
+            <label for="zip">ZIP code<input id="zip" name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="103__"></label>
+            <button class="btn" type="submit">Find my poll sites ›</button>
+          </div>
+          <p class="err" id="err" hidden></p>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="r-h" aria-live="polite">
+        <div class="eyebrow step"><i>2</i> Your poll sites</div>
+        <h2 id="r-h" class="cond" style="margin-top: 8px">Where you vote</h2>
+        <p class="sub">Your assigned early voting site and Election Day poll site, from the NYC Board of Elections.</p>
+        <div id="ph" class="placeholder">
+          <b style="color: var(--ink)">Enter your address to see:</b>
+          <ul>
+            <li>Your early voting site (Oct. 24 – Nov. 1)</li>
+            <li>Your Election Day poll site (Tues., Nov. 3)</li>
+          </ul>
+        </div>
+        <div id="res" class="result" hidden></div>
+      </section>
+    </div>
+
+    <section class="sched" aria-labelledby="s-h">
+      <div class="eyebrow" style="color: var(--sky)">When to vote</div>
+      <h2 id="s-h" class="cond" style="margin-top: 6px">9 days of early voting.<br><span style="color: var(--red)">Or vote on Nov. 3.</span></h2>
+      <p class="sub">Early voting runs Saturday, Oct. 24 through Sunday, Nov. 1. Vote at your assigned early voting site.</p>
+      <div class="days" id="days"></div>
+      <div class="eday" id="eday">
+        <div class="big cond">Nov. 3</div>
+        <div class="mid"><div class="t cond">Election Day · Tuesday</div><div class="s">Vote at your Election Day poll site. It may not be the same place as your early voting site.</div></div>
+        <div class="hrs"><div class="t cond">6 a.m. – 9 p.m.</div><div class="s">In line by 9? You can vote.</div></div>
+      </div>
+    </section>
+
+    <section class="tips" aria-label="Good to know">
+      <div class="tip"><h3 class="cond">Two sites, check both</h3><p>Early voting sites are larger and fewer, so yours is often different from your usual Election Day poll site.</p></div>
+      <div class="tip"><h3 class="cond">Questions?</h3><p>Call the NYC Board of Elections:<br><span class="phone">1-866-VOTE-NYC (1-866-868-3692)</span></p></div>
+    </section>
+
+    <section class="vote-sam" aria-label="Re-elect Sam Pirozzolo">
+      <img src="/assets/logo-white.png" alt="Sam Pirozzolo, State Assembly">
+      <div><div class="t cond">Re-elect Sam Pirozzolo.<br><span>Fighting for Staten Island.</span></div><p>Every vote counts. Make a plan, and bring a neighbor with you.</p></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="paid">Paid for by Sam Pirozzolo for Assembly 2026</div>
+    <small>Poll site assignments come from the NYC Board of Elections. Your address is used only to look up your poll site and is never saved.</small>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var DAYS = [
+    ['Sat', 24, 10, '9 a.m.–5 p.m.'], ['Sun', 25, 10, '9 a.m.–5 p.m.'], ['Mon', 26, 10, '9 a.m.–5 p.m.'],
+    ['Tue', 27, 10, '10 a.m.–8 p.m.', 'Open late'], ['Wed', 28, 10, '10 a.m.–8 p.m.', 'Open late'],
+    ['Thu', 29, 10, '8 a.m.–4 p.m.', 'Opens early'], ['Fri', 30, 10, '9 a.m.–5 p.m.'], ['Sat', 31, 10, '9 a.m.–5 p.m.'],
+    ['Sun', 1, 11, '9 a.m.–5 p.m.', 'Last day']
+  ];
+  var now = new Date();
+  var today = now.getFullYear() === 2026 ? (now.getMonth() + 1) * 100 + now.getDate() : 0;
+  var wrap = document.getElementById('days');
+  DAYS.forEach(function (d) {
+    var key = d[2] * 100 + d[1];
+    var el = document.createElement('div');
+    el.className = 'day' + (d[4] && d[4] !== 'Last day' ? ' late' : '') + (key === today ? ' today' : '') + (today && key < today ? ' past' : '');
+    var mon = d[2] === 10 ? 'Oct.' : 'Nov.';
+    var tag = key === today ? 'Today' : (d[4] || '');
+    el.innerHTML = '<div class="dow">' + d[0] + '</div><div class="d cond">' + d[1] + '</div><div class="dow" style="letter-spacing:.06em;opacity:.8">' + mon + '</div><div class="h">' + d[3].replace('–', '–<br>') + '</div>' + (tag ? '<div class="tag">' + tag + '</div>' : '');
+    wrap.appendChild(el);
+  });
+
+  var form = document.getElementById('addr'), err = document.getElementById('err');
+  function tidy(s) { return s.replace(/\s+/g, ' ').trim(); }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var h = tidy(form.house.value), s = tidy(form.street.value), z = tidy(form.zip.value);
+    var bad = [];
+    [['house', h], ['street', s]].forEach(function (p) { var ok = !!p[1]; form[p[0]].setAttribute('aria-invalid', ok ? 'false' : 'true'); if (!ok) bad.push(p[0]); });
+    var zok = /^\d{5}$/.test(z); form.zip.setAttribute('aria-invalid', zok ? 'false' : 'true'); if (!zok) bad.push('zip');
+    if (bad.length) {
+      err.textContent = bad.indexOf('zip') > -1 && bad.length === 1 ? 'Enter a 5-digit ZIP code.' : 'Fill in your house number, street name and 5-digit ZIP code.';
+      err.hidden = false; form[bad[0]].focus(); return;
+    }
+    err.hidden = true;
+    document.getElementById('ph').hidden = true;
+    var res = document.getElementById('res'); res.hidden = false;
+    if (window.matchMedia('(max-width: 860px)').matches) res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.copy'); if (!b) return;
+    var el = document.getElementById(b.getAttribute('data-for')), txt = el.textContent;
+    function ok() { b.textContent = 'Copied'; b.classList.add('done'); setTimeout(function () { b.textContent = 'Copy'; b.classList.remove('done'); }, 1600); }
+    function fallback() { var r = document.createRange(); r.selectNodeContents(el); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); b.textContent = 'Selected'; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
+    try { navigator.clipboard.writeText(txt).then(ok, fallback); } catch (x) { fallback(); }
+  });
+})();
+</script>
+<script>
+/* Live lookup: the page sends the address to /api/lookup (this site's own server),
+   which asks NYC Geoclient for the districts and Google for the poll sites. Keys stay on the server. */
+(function () {
+  var form = document.getElementById('addr'), res = document.getElementById('res'), grid = document.querySelector('.grid2');
+  if (!form || !res || !grid) return;
+  var EV = 'Your early voting site · Oct. 24 – Nov. 1', ED = 'Your Election Day poll site · Tues., Nov. 3';
+  var VOTE_NYC = 'https://findmypollsite.vote.nyc';
+
+  var team = document.createElement('section');
+  team.className = 'team'; team.hidden = true; team.setAttribute('aria-live', 'polite');
+  team.innerHTML = '<div class="bar" aria-hidden="true"></div><h2 class="cond">Elect the team that will <span>fight for Staten Island.</span></h2>' +
+    '<p class="tsub"></p><div class="tbody"></div>';
+  grid.parentNode.insertBefore(team, grid.nextSibling);
+  var tsub = team.querySelector('.tsub'), tbody = team.querySelector('.tbody');
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function track(ev) { try { fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event: ev }), keepalive: true }); } catch (e) {} }
+  function card(s, kind) {
+    var lbl = kind === 'ev' ? EV : ED;
+    if (!s) {
+      return '<div class="site ' + kind + '"><div class="lbl">' + lbl + '</div><div class="msg">' +
+        (kind === 'ev' ? 'Your early voting site isn’t in our lookup yet. Find it on the Board of Elections site.' :
+          'Election Day sites for this address haven’t been published to our lookup yet. Check back closer to Nov. 3, or look it up now on the Board of Elections site.') +
+        '</div><a class="btn" data-ev="vote_nyc" href="' + VOTE_NYC + '" target="_blank" rel="noopener noreferrer">Find my ' + (kind === 'ev' ? 'early voting' : 'Election Day') + ' site ↗</a></div>';
+    }
+    var map = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.name + ', ' + s.address);
+    return '<div class="site ' + kind + '"><div class="lbl">' + lbl + '</div><div class="nm">' + esc(s.name) + '</div><div class="ad">' + esc(s.address) + '</div>' +
+      (s.hours && s.hours.length ? '<div class="hr">' + esc(s.hours.join('\n')) + '</div>' : '') +
+      '<a class="dir" data-ev="directions" href="' + map + '" target="_blank" rel="noopener noreferrer">Directions ↗</a></div>';
+  }
+  function renderTeam(d) {
+    var t = d.ticket || [];
+    if (!t.length) { team.hidden = true; return; }
+    var ds = d.districts || {}, bits = [];
+    if (ds.cd) bits.push('Congressional District ' + ds.cd);
+    if (ds.sd) bits.push('Senate District ' + ds.sd);
+    if (ds.ad) bits.push('Assembly District ' + ds.ad);
+    tsub.textContent = 'Sam Pirozzolo’s endorsed team for your ballot' + (bits.length ? ' · ' + bits.join(' · ') : '') + '.';
+    tbody.innerHTML = '<div class="tgrid">' + t.map(function (c) {
+      return '<div class="cand' + (c.name === 'Sam Pirozzolo' ? ' me' : '') + '"><img src="' + esc(c.img) + '" alt="' + esc(c.name) + '" width="64" height="64">' +
+        '<span class="txt"><span class="o">' + esc(c.office) + '</span><span class="n">' + esc(c.name) + '</span></span></div>';
+    }).join('') + '</div>' +
+      (d.partial ? '<p class="tnote">Your State Senate, Assembly and municipal court candidates depend on your exact district.</p>' : '');
+    team.hidden = false;
+  }
+  function fail(msg) {
+    res.innerHTML = '<div class="lookup"><p class="status bad">' + esc(msg) + '</p><a class="btn" data-ev="vote_nyc" href="' + VOTE_NYC + '" target="_blank" rel="noopener noreferrer">Look it up on vote.nyc ↗</a></div>';
+    team.hidden = true;
+  }
+
+  var seq = 0;
+  form.addEventListener('submit', function () {
+    if (!document.getElementById('err').hidden) return;
+    var mine = ++seq;
+    var payload = { house: form.house.value.trim(), street: form.street.value.trim(), zip: form.zip.value.trim() };
+    res.innerHTML = '<div class="lookup"><p class="status">Looking up your poll sites…</p></div>';
+    team.hidden = false; tsub.textContent = 'Sam Pirozzolo’s endorsed team for your ballot.'; tbody.innerHTML = '<p class="tload">Loading your ballot…</p>';
+    fetch('/api/lookup', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }, function () { return { ok: false, j: {} }; }); })
+      .then(function (x) {
+        if (mine !== seq) return;
+        if (!x.ok || !x.j || x.j.error) { fail((x.j && x.j.error) || 'The automatic lookup isn’t available right now.'); return; }
+        var d = x.j;
+        res.innerHTML = '<div class="lookup">' + card(d.early, 'ev') + card(d.eday, 'ed') + '<p class="note">Poll site data from the NYC Board of Elections.</p></div>';
+        renderTeam(d);
+      })
+      .catch(function () { if (mine === seq) fail('The automatic lookup isn’t available right now.'); });
+  });
+  res.addEventListener('click', function (e) { var a = e.target.closest('a[data-ev]'); if (a) track(a.getAttribute('data-ev')); });
+})();
+</script>
+</body>
+</html>
